@@ -1,5 +1,5 @@
 module TL = Tablecloth.List
-module TA = TC_Array
+module TA = Tablecloth_Array
 
 let rndInt _ = Js.Math.random_int 0 10
 

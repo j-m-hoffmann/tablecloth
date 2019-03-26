@@ -1,7 +1,7 @@
 open Tablecloth
 open Jest
 open Expect
-module Array = TC_Array
+module Array = Tablecloth_Array
 
 let () =
   describe "List" (fun () ->
