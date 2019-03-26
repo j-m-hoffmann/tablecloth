@@ -61,6 +61,13 @@ let indexedFilter = indexed_filter
 let filterMap ~(f : 'a -> 'b option) (a : 'a array) : 'b array = BA.keepMap a f
 let filter_map = filterMap
 
+(*using flip to get to the same function signature may no be ideal*)
+let foldl ~(f : 'a -> 'b -> 'b) ~(init : 'b) (a : 'a array) : 'b =
+  BA.reduce a init (flip f)
+
+let foldr ~(f : 'a -> 'b -> 'b) ~(init : 'b) (a : 'a array) : 'b =
+  BA.reduceReverse a init (flip f)
+
 let init (a : 'a array) : 'a array option =
   let l = length a in
   match l with
@@ -75,13 +82,6 @@ let any ~(f : 'a -> bool) (a : 'a array) : bool = BA.some a f
 let iter ~(f : 'a -> unit) (a : 'a array) : unit = BA.forEach a f
 
 (*Still need to be ported to native*)
-
-(*using flip to get to the same function signature may no be ideal*)
-let foldl ~(f : 'a -> 'b -> 'b) ~(init : 'b) (a : 'a array) : 'b =
-  BA.reduce a init (flip f)
-
-let foldr ~(f : 'a -> 'b -> 'b) ~(init : 'b) (a : 'a array) : 'b =
-  BA.reduceReverse a init (flip f)
 
 let elemIndex ~(value : 'a) (a : 'a array) : int option =
   a
